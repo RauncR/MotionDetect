@@ -39,13 +39,11 @@ def configure_regions(regions, background_frame = None):
         lambda x: None
     )
 
-    print("Press keys 1–5 to toggle regions. Press Enter to confirm.")
-
     while True:
         canvas = canvas_base.copy()
 
         h, w = canvas.shape[:2]
-
+        instruction_text = "Press 1-5 to toggle regions, ENTER to continue"
         for rid, region in regions.items():
             border_padding = 2
 
@@ -73,8 +71,9 @@ def configure_regions(regions, background_frame = None):
             cv2.putText(canvas, msg3, (x1 + 5, y1 + 90), cv2.FONT_HERSHEY_SIMPLEX, 0.9, color, 2)
 
             # --- Instructions at bottom ---
-        cv2.putText(canvas, "Press 1-5 to toggle regions, ENTER to continue",
+        cv2.putText(canvas, instruction_text,
                     (20, h - 20), cv2.FONT_HERSHEY_SIMPLEX, 1.2, (200, 200, 200), 2)
+
         # --- Show/update canvas for region selection ---
         cv2.imshow("Select regions", canvas)
         key = cv2.waitKey(45) & 0xFF #Listen explicitly for keys, stops loop for 45ms
@@ -120,4 +119,11 @@ def configure_regions(regions, background_frame = None):
             "sensitivity": raw
         }]
     cv2.destroyWindow("Select regions")
+    cv2.namedWindow("Search window", cv2.WINDOW_NORMAL)
+
+    search_canvas = canvas_base.copy()
+    h, w = search_canvas.shape[:2]
+    cv2.imshow("Search window", search_canvas)
+    cv2.resizeWindow("Search window", int(w/3), int(h/3))
+    cv2.waitKey(1)
     return enabled_regions
