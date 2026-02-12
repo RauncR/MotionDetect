@@ -1,7 +1,8 @@
 import cv2
 import os
-from datetime import datetime
+import time
 from .video_recorder import VideoRecorder
+
 
 
 def detect_motion(video_path, output_dir, enabled_regions):
@@ -12,6 +13,9 @@ def detect_motion(video_path, output_dir, enabled_regions):
         regions (dict): Dictionary of regions with keys:
                         'x_start', 'x_end', 'y_start', 'y_end', 'enabled', 'sensitivity'
     """
+    blink_interval = 0.5
+    last_blink_time = time.time()
+    blink_on = True
     # --- If no output - creates, if there is - ok ---
     os.makedirs(output_dir, exist_ok=True)
 
@@ -45,8 +49,7 @@ def detect_motion(video_path, output_dir, enabled_regions):
     if fps <= 0:
         fps = 30
     recorder = VideoRecorder(fps=fps)
-    text = ""
-    color = (0, 255, 255)
+
     while True: #While True runs unless explicitly broken out of, error or returned.
 
         cooldown = cv2.getTrackbarPos("Cool. sec", "Controls")
@@ -75,7 +78,7 @@ def detect_motion(video_path, output_dir, enabled_regions):
             gray = cv2.GaussianBlur(gray, (15, 15), 0)
 
             diff = cv2.absdiff(prev_region_grays[i], gray)
-            _, thresh = cv2.threshold(diff, 5 ,255, cv2.THRESH_BINARY)
+            _, thresh = cv2.threshold(diff, 8 ,255, cv2.THRESH_BINARY)
             thresh = cv2.dilate(thresh, None, iterations=1)
 
             motion_pixels = cv2.countNonZero(thresh)
@@ -93,14 +96,20 @@ def detect_motion(video_path, output_dir, enabled_regions):
 
         # --- Save frame if motion detected ---
         recorder.update(frame, motion_detected)
-        ui = ui_base.copy()
 
-        if recorder.recording:
-            text = "RECORDING"
+        ui = ui_base.copy()
+        now = time.time()
+        if motion_detected or recorder.recording:
+            if now - last_blink_time > blink_interval:
+                blink_on = not blink_on
+                last_blink_time = now
+            text = "RECORDING" if blink_on else ""
             color = (0, 0, 255)
         else:
             text = "SEARCHING..."
             color = (0, 255, 255)
+            blink_on = True
+
         cv2.putText(ui, text, (40, 80),
                     cv2.FONT_HERSHEY_SIMPLEX, 2,
                     color, 3)
