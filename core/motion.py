@@ -45,7 +45,8 @@ def detect_motion(video_path, output_dir, enabled_regions):
     if fps <= 0:
         fps = 30
     recorder = VideoRecorder(fps=fps)
-
+    text = ""
+    color = (0, 255, 255)
     while True: #While True runs unless explicitly broken out of, error or returned.
 
         cooldown = cv2.getTrackbarPos("Cool. sec", "Controls")
@@ -91,13 +92,19 @@ def detect_motion(video_path, output_dir, enabled_regions):
 
         # --- Save frame if motion detected ---
         recorder.update(frame, motion_detected)
-        ui = frame.copy()
-        cv2.putText(ui, "Searching...", (40, 80),
-                    cv2.FONT_HERSHEY_SIMPLEX, 2,
-                    (0, 255, 255), 3)
+        ui = ui_base.copy()
 
-        cv2.imshow("Search window", ui)
-        cv2.waitKey(1)
+    if motion_detected:
+        text = "RECORDING"
+        color = (0, 0, 255)
+    else:
+        text = "SEARCHING..."
+        color = (0, 255, 255)
+    cv2.putText(ui, text, (40, 80),
+            cv2.FONT_HERSHEY_SIMPLEX, 2,
+            color, 3)
+    cv2.imshow("Search window", ui)
+    cv2.waitKey(1)
         # --- Prepare for next iteration ---
 
     recorder.close()
