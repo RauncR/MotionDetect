@@ -94,17 +94,17 @@ def detect_motion(video_path, output_dir, enabled_regions):
         recorder.update(frame, motion_detected)
         ui = ui_base.copy()
 
-    if motion_detected:
-        text = "RECORDING"
-        color = (0, 0, 255)
-    else:
-        text = "SEARCHING..."
-        color = (0, 255, 255)
-    cv2.putText(ui, text, (40, 80),
-            cv2.FONT_HERSHEY_SIMPLEX, 2,
-            color, 3)
-    cv2.imshow("Search window", ui)
-    cv2.waitKey(1)
+        if recorder.recording:
+            text = "RECORDING"
+            color = (0, 0, 255)
+        else:
+            text = "SEARCHING..."
+            color = (0, 255, 255)
+        cv2.putText(ui, text, (40, 80),
+                    cv2.FONT_HERSHEY_SIMPLEX, 2,
+                    color, 3)
+        cv2.imshow("Search window", ui)
+        cv2.waitKey(1)
         # --- Prepare for next iteration ---
 
     recorder.close()
