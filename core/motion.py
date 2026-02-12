@@ -20,7 +20,10 @@ def detect_motion(video_path, output_dir, enabled_regions):
     ret, prev_frame = cap.read()
     if not ret:
         raise RuntimeError(f"Video capture failed: {video_path}")
-
+    ui_base = prev_frame.copy()
+    cv2.imshow("Search window", ui_base)
+    cv2.waitKey(1)
+    
     height, width = prev_frame.shape[:2]
     prev_region_grays = {}
 
