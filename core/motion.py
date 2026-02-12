@@ -89,6 +89,7 @@ def detect_motion(video_path, output_dir, enabled_regions):
             if motion_pixels > region_threshold:
                 motion_detected = True
                 break
+            prev_region_grays[i] = gray
 
         # --- Save frame if motion detected ---
         recorder.update(frame, motion_detected)
