@@ -48,6 +48,6 @@ Frame count is introduced to avoid 2 second clips. User sets it as cooldown in s
 
 ##Future Improvements  
 
-Big picture on a high level: User launches and app (i.e ThiefBuster2000.exe) and is prompted to select either file search or live search. We have file search, but live screen monitoring should be written and introduced to completely avoid necessity for video exports   from different interfaces. User would draw a main frame box - usually complete camera view and then ROI (or perhaps several ROIS) and commands program on surveillance. if motion detected - clip saved. Features would be similar to current app.  
+Big picture on a high level: User launches the app (i.e ThiefBuster2000.exe) and is prompted to select either file search or live search. We have file search, but live screen monitoring should be written and introduced to completely avoid necessity for video exports   from different interfaces. User would draw a main frame box - usually complete camera view and then ROI (or perhaps several ROIs) and commands program on surveillance. if motion detected - clip saved. Features would be similar to current app.  
 
 Opening a dedicated folder as app finishes.  
