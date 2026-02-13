@@ -16,10 +16,10 @@ UI and ROI Setup: First frame is displayed for the user up to 5 ROI's or if no R
 
 
 Frame Processing:
-Convert frames to grayscale
-Apply blur to reduce noise
-Compare against a background reference (previous frame)
-Threshold and dilate differences to highlight motion
+Convert frames to grayscale,
+Apply blur to reduce noise,
+Compare against a background reference (previous frame),
+Threshold and dilate differences to highlight motion,
 
 Motion Evaluation: Each ROI calculates motion separately.
 Motion triggers recording, cooldown logic and expansion buffer manage clip length.
