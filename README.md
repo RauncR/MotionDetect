@@ -12,13 +12,12 @@
 ## How It Works  
 
 - User Input: Select a video file.  
-- UI and ROI Setup: First frame is displayed for the user up to 5 ROI's or if no ROI is selected - full screen is searched.  
+- User is displayed with screenshot of the video - first frame. This helps user to better assess the desired ROI.  
 - Frame Processing:  
 - Convert frames to grayscale   
 - Apply blur to reduce noise    
 - Compare against a background reference (previous frame)    
 - Threshold and dilate differences to highlight motion  
-
 - Motion Evaluation: Each ROI calculates motion separately.  
 - Motion triggers recording, cooldown logic and expansion buffer manage clip length.  
 - User Feedback: Status messages display current recording state; app closes when done.  
@@ -47,9 +46,9 @@ python main.py
 
 
 ## Possible problems and their solutions:  
-After grayscale and blur pixel shade of gray change is compared against same pixel in previous frame. Shade of gray varies from black:0 to white:255. Point of decision can be set i.e 20 which allow minor pixel changes and helps to reduce noise.  
-It can also be lowered to "increase sensitivity" and completely avoid skipping movements. At the same time dilate iterations can also greatly increase sensitivity. User set sensitivity is only "percentage of changed pixels against whole pixels of ROI" to trigger motion.  
-App logic tilts towards making code sensitive and give more responsibility for user to set desired sensitivity.   
+After grayscale and blur, pixel shade of gray change is compared against same pixel in previous frame. Shade of gray varies from black:0 to white:255. Point of decision can be set i.e 20 which allow minor pixel changes and helps to reduce pixel noise.  
+It can also be lowered to "increase sensitivity" but it comes with a risk of fake positives. At the same time dilate iterations can also greatly increase sensitivity - again, greater risk of fake positives. User set sensitivity is only "percentage of changed pixels against whole pixels of ROI" to trigger motion.  
+App logic tilts towards making code sensitive and give more responsibility for user to set desired sensitivity. Finding best balance between threshold, dilate and user-set sensitivity is the key for best possible app reliability.
 
 Frame count is introduced to avoid 2 second clips. User sets it as cooldown in seconds which literally is (fps * seconds) - if that amount of frames will not trigger motion, clip is saved.  
 
