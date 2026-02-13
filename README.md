@@ -40,4 +40,15 @@ Adjust ROIs and sensitivities, when done press ENTER.
 When motion is detected and clip starts recording "RECORDING" blinks.
 
 
-Possible problems
+Possible problems and their solutions:
+After grayscale and blur pixel shade of gray change is compared against same pixel in previous frame. Shade of gray varies from black:0 to white:255. Point of decision can be set i.e 20 which allow minor pixel changes and helps to reduce noise.
+It can also be lowered to "increase sensitivity" and completely avoid skipping movements. At the same time dilate iterations can also greatly increase sensitivity. User set sensitivity is only "percentage of changed pixels against whole pixels of ROI" to trigger motion.
+App logic tilts towards making code sensitive and give more responsibility for user to set desired sensitivity. 
+
+Frame count is introduced to avoid 2 second clips. User sets it as cooldown in seconds which literally is (fps * seconds) - if that amount of frames will not trigger motion, clip is saved.
+
+Future Improvements
+
+Big picture on a high level: User launches and app (i.e ThiefBuster2000.exe) and is prompted to select either file search or live search. We have file search, but live screen monitoring should be written and introduced to completely avoid necessity for video exports from different interfaces. User would draw a main frame box - usually complete camera view and then ROI (or perhaps several ROIS) and commands program on surveillance. if motion detected - clip saved. Features would be similar to current app.
+
+Opening a dedicated folder as app finishes.
