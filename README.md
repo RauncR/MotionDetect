@@ -1,4 +1,5 @@
 # ThiefBuster 2000 – Smart Motion Clip Generator  
+![Busted](accessories/ThiefBuster.png)
 
 - Automatically detects motion in video files and generates video clips of activity.  
 - Users can define multiple Regions of Interest (ROIs), set per-region sensitivity and have the app search for motion.  
