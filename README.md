@@ -2,6 +2,10 @@
 
 - Automatically detects motion in video files and generates video clips of activity.  
 - Users can define multiple Regions of Interest (ROIs), set per-region sensitivity and have the app search for motion.  
+## Purpose
+- Built partly for work-related tasks, but mostly **to learn and experiment**
+- This project helped me learn or reinforce my knowledge of **UI, modular components, and video processing and architectural thinking**
+- Learned or reinforced my knowledge of **UI, modular components, and video processing**
 
 ## Features  
 - ROI-based motion detection: Top-left, top-right, bottom-left, bottom-right, and center each ROI's sensitivity can be adjusted by the user.  
