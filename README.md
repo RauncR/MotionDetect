@@ -51,6 +51,9 @@ python main.py
 - "SEARCHING" is displayed.  
 - When motion is detected and clip starts recording "RECORDING" blinks.
 - App closes when done  
+<p align="left">
+<img src="accessories/MotionDetect.png" width=600/>
+</p>
 
 
 ## Possible problems and their solutions:  
