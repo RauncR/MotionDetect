@@ -50,7 +50,8 @@ python main.py
 - Adjust ROIs and sensitivities, when done press ENTER.  
 - "SEARCHING" is displayed.  
 - When motion is detected and clip starts recording "RECORDING" blinks.
-- App closes when done  
+- App closes when done
+  
 <p align="left">
   <img src="accessories/MotionDetect.png" width="600"/>
 </p>
