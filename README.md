@@ -53,7 +53,7 @@ python main.py
 - App closes when done
   
 <p align="left">
-  <img src="accessories/MotionDetect.png" width="600"/>
+  <img src="accessories/MotionDetect.png"/>
 </p>
 
 
