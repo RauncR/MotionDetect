@@ -52,9 +52,6 @@ python main.py
 - When motion is detected and clip starts recording "RECORDING" blinks.
 - App closes when done
   
-<p align="left">
-  <img src="accessories/MotionDetect.png"/>
-</p>
 
 
 ## Possible problems and their solutions:  
